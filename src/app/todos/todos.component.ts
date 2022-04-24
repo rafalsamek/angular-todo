@@ -21,4 +21,7 @@ export class TodosComponent implements OnInit {
     this.todoService.getTodos().subscribe(todos => this.todos = todos)
   }
 
+  sortBy(direction: string): void {
+    this.todoService.getTodosOrderBy(direction).subscribe(todos => this.todos = todos)
+  }
 }

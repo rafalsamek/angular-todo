@@ -41,32 +41,38 @@ export class TodoService {
   }
 
   getUpcommingTodos(): Observable<Todo[]> {
-    return this.http.get<Todo[]>(this.baseUrl + "/todos/upcoming").pipe(
+    return this.http.get<Todo[]>(this.baseUrl + "/todos/upcoming/list").pipe(
       catchError(this.handleError<Todo[]>('getUpcomingTodos', []))
     );
   }
 
   getTodo(id: number): Observable<Todo> {
-    return this.http.get<Todo>(this.baseUrl + "/todo/" + id).pipe(
+    return this.http.get<Todo>(this.baseUrl + "/todos/" + id).pipe(
       catchError(this.handleError<Todo>('getTodo', defaultTodo as Todo))
     );
   }
 
   removeTodo(id: number): Observable<Todo> {
-    return this.http.delete<Todo>(this.baseUrl + "/todo/" + id).pipe(
+    return this.http.delete<Todo>(this.baseUrl + "/todos/" + id).pipe(
       catchError(this.handleError<Todo>('removeTodo', defaultTodo as Todo))
     );
   }
 
   addTodo(todo: Todo): Observable<Todo> {
-    return this.http.post<Todo>(this.baseUrl + "/todo", todo, httpOptions).pipe(
+    return this.http.post<Todo>(this.baseUrl + "/todos", todo, httpOptions).pipe(
       catchError(this.handleError<Todo>('addTodo', defaultTodo as Todo))
     );
   }
 
   updateTodo(todo: Todo): Observable<Todo> {
-    return this.http.put<Todo>(this.baseUrl + "/todo", todo, httpOptions).pipe(
+    return this.http.put<Todo>(this.baseUrl + "/todos", todo, httpOptions).pipe(
       catchError(this.handleError<Todo>('updateTodo', defaultTodo as Todo))
+    );
+  }
+
+  getTodosOrderBy(direction: string): Observable<Todo[]> {
+    return this.http.get<Todo[]>(this.baseUrl + "/todos/order/" + direction, httpOptions).pipe(
+      catchError(this.handleError<Todo[]>('getTodosOrderBy', []))
     );
   }
 
