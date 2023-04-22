@@ -71,7 +71,7 @@ export class TodoService {
   }
 
   getTodosOrderBy(direction: string): Observable<Todo[]> {
-    return this.http.get<Todo[]>(this.baseUrl + "/todos/order/" + direction, httpOptions).pipe(
+    return this.http.get<Todo[]>(this.baseUrl + "/todos?order=" + direction, httpOptions).pipe(
       catchError(this.handleError<Todo[]>('getTodosOrderBy', []))
     );
   }
